@@ -4,26 +4,22 @@
 
 const express = require('express');
 const multer = require('multer');
-const googleResponse = await fetch(
-  `https://safebrowsing.googleapis.com/v4/threatMatches:find?key=${process.env.GOOGLE_API_KEY}`,
-  { method: 'POST', ... }
-);
 const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
 const upload = multer();
 
-// ✅ Enable CORS for all origins (for frontend use)
+// ✅ Enable CORS for all origins
 app.use(cors());
 
-// ✅ Optional: Middleware to log incoming requests
+// ✅ Log incoming requests
 app.use((req, res, next) => {
   console.log(`📩 ${req.method} ${req.originalUrl}`);
   next();
 });
 
-// ✅ Home route to check if server is live
+// ✅ Health check route
 app.get('/', (req, res) => {
   res.send("🧠 GLOB_AI backend is live and ready.");
 });
